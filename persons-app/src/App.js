@@ -112,13 +112,16 @@ class App extends Component {
             //Change button color to red when person div shows
             style.backgroundColor = 'red';
         }
+        // returns a string as 'red bold'
+        let styles = ['red', 'bold'].join(' ')
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">I am new to React</h1>
            
         </header>
-        <p> Hello there!!! Is it working ?</p>
+        <p className={styles} > Hello there!!! Is it working ?</p>
  
         <button style={style} onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
         <button style={style} onClick={this.togglePersonsHandler}> Toggle Persons</button>
