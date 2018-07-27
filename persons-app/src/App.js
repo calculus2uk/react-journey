@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.css';
 import Person from './Person/Person'; 
 
 
@@ -57,17 +57,19 @@ class App extends Component {
         this.setState({ persons: personCopy })
     }
     render() {
-        const style = {
+/*         const style = {
             backgroundColor: 'green',
             color: 'white',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer'
-        }
+        } */
 
         // Normal JS code can be written here
         let people = null;
+
+        let btnStyles = ''; // Using the styles after the eject
 
         if (this.state.showPersons) {
             people = (
@@ -110,21 +112,22 @@ class App extends Component {
                 </div>
             );
             //Change button color to red when person div shows
-            style.backgroundColor = 'red';
+            //style.backgroundColor = 'red';
+            btnStyles = styles.Red;
         }
         // returns a string as 'red bold'
-        let styles = ['red', 'bold'].join(' ')
-
+        //let styles = ['red', 'bold'].join(' ')
+        
     return (
-      <div className="App">
+      <div className={styles.App}>
         <header className="App-header">
           <h1 className="App-title">I am new to React</h1>
            
         </header>
-        <p className={styles} > Hello there!!! Is it working ?</p>
+        <p className={styles.bold + ' ' + styles.red } > Hello there!!! Is it working ?</p>
  
-        <button style={style} onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
-        <button style={style} onClick={this.togglePersonsHandler}> Toggle Persons</button>
+        <button className={btnStyles} onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
+        <button className={btnStyles} onClick={this.togglePersonsHandler}> Toggle Persons</button>
             
         {people}
       </div>
