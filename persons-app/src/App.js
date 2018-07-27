@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.css';
 import Person from './Person/Person'; 
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'; 
 
 
 class App extends Component {
@@ -75,7 +76,8 @@ class App extends Component {
             people = (
                 <div>
                     {this.state.persons.map((person, index) => {
-                        return <Person
+                        return <ErrorBoundary>
+                            <Person
                             //click={this.deletePersonHandler.bind(this, index)}
 
                             //Alternate to the bind method above is annonymous function
@@ -89,7 +91,8 @@ class App extends Component {
                             // and every elemt will have a diff index
                             key={person.id}
                  
-                            fetchName={(event) => this.fetchNameHandler(event, index) } />  
+                            fetchName={(event) => this.fetchNameHandler(event, index) } />
+                            </ErrorBoundary> 
                     })}
                     {/* A JSX comment 
 
