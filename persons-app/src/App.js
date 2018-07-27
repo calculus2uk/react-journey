@@ -57,6 +57,15 @@ class App extends Component {
         this.setState({ persons: personCopy })
     }
     render() {
+        const style = {
+            backgroundColor: 'green',
+            color: 'white',
+            font: 'inherit',
+            border: '1px solid blue',
+            padding: '8px',
+            cursor: 'pointer'
+        }
+
         // Normal JS code can be written here
         let people = null;
 
@@ -100,6 +109,8 @@ class App extends Component {
                     */}
                 </div>
             );
+            //Change button color to red when person div shows
+            style.backgroundColor = 'red';
         }
     return (
       <div className="App">
@@ -109,8 +120,8 @@ class App extends Component {
         </header>
         <p> Hello there!!! Is it working ?</p>
  
-        <button onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
-        <button onClick={this.togglePersonsHandler}> Toggle Persons</button>
+        <button style={style} onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
+        <button style={style} onClick={this.togglePersonsHandler}> Toggle Persons</button>
             
         {people}
       </div>
