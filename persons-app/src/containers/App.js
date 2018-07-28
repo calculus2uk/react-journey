@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.css';
-import Person from '../components/Persons/Person/Person'; 
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'; 
+import Persons from '../components/Persons/Persons';
+import Cockpit from  '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -18,8 +18,9 @@ class App extends Component {
 
     getPersonFeatures = (event) => {
         //get values from input field and split
-        let[id, name, age] = event.target.value.split(' ,');
-        this.state.newPerson = {id: id, name: name, age:age}
+        //let[id, name, age] = event.target.value.split(' ,');
+        //this.state.newPerson = {id: id, name: name, age:age}
+        return true
     }
 
     addPersonHandler = () => {
@@ -86,11 +87,18 @@ class App extends Component {
         // Normal JS code can be written here
         let people = null;
 
-        let btnStyles = ''; // Using the styles after the eject
+        //let btnStyles = ''; // Using the styles after the eject
 
         if (this.state.showPersons) {
             people = (
                 <div>
+                    <Persons
+                        persons={this.state.persons}
+                        clicked={this.deletePersonHandler}
+                        fetchName={this.fetchNameHandler}
+                    />
+
+                    {/* This no longer needed coz a new Persons Component has been created *
                     {this.state.persons.map((person, index) => {
                         return <ErrorBoundary>
                             <Person
@@ -109,7 +117,7 @@ class App extends Component {
                  
                             fetchName={(event) => this.fetchNameHandler(event, index) } />
                             </ErrorBoundary> 
-                    })}
+                    })}/}
                     {/* A JSX comment 
 
                     <Person
@@ -132,24 +140,18 @@ class App extends Component {
             );
             //Change button color to red when person div shows
             //style.backgroundColor = 'red';
-            btnStyles = styles.Red;
+            //btnStyles = styles.Red;
         }
         // returns a string as 'red bold'
         //let styles = ['red', 'bold'].join(' ')
         
     return (
       <div className={styles.App}>
-        <header className="App-header">
-          <h1 className="App-title">I am new to React</h1>
-           
-        </header>
-        <p className={styles.bold + ' ' + styles.red } > Hello there!!! Is it working ?</p>
- 
-        <button className={btnStyles} onClick={this.switchNameHandler.bind(this, 'Isaccccc!!')}>Click Me</button>
-        <button className={btnStyles} onClick={this.togglePersonsHandler}> Toggle Persons</button>
-        <p><button className={styles.yellow} onClick={this.addPersonHandler}>Add Person</button></p>
-        <p><input type="text" placeholder="Add person " onChange={this.getPersonFeatures}/></p>
-            
+        <Cockpit 
+        switch={this.switchNameHandler}
+        toggle={this.togglePersonsHandler}
+        addPerson={this.addPersonHandler}
+        getPerson={this.getPersonFeatures}/>
         {people}
       </div>
         
