@@ -18,9 +18,9 @@ class App extends Component {
 
     getPersonFeatures = (event) => {
         //get values from input field and split
-        //let[id, name, age] = event.target.value.split(' ,');
-        //this.state.newPerson = {id: id, name: name, age:age}
-        return true
+        let[id, name, age] = event.target.value.split(' ,');
+        let fetchedNewPerson = {id: id, name: name, age:age}
+        this.setState({newPerson: fetchedNewPerson})
     }
 
     addPersonHandler = () => {
