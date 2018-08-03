@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Contact from './Contact';
-import { Consumer } from '../context';
+import { Consumer } from '../../context';
 
 class Contacts extends Component {
-  onDeleteContact = id => {
+  /*   onDeleteContact = id => {
     const { contacts } = this.state;
 
     const newContacts = contacts.filter(contact => contact.id !== id);
 
     this.setState({ contacts: newContacts });
-  };
+  }; */
 
   render() {
     return (
@@ -29,7 +29,7 @@ class Contacts extends Component {
                   contact={contact}
                   /* BIND OR ANNONYMOUS FUNCTION */
                   //onDeleteClickHandler={this.onDeleteContact.bind(this, contact.id)}
-                  onDeleteClickHandler={() => this.onDeleteContact(contact.id)}
+                  // onDeleteClickHandler={() => this.onDeleteContact(contact.id)}
                 />
               ))}
             </React.Fragment>
