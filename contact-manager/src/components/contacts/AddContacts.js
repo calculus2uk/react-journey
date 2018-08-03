@@ -7,7 +7,9 @@ class AddContacts extends Component {
   state = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    errors: '',
+    status: false
   };
 
   onFieldChange = event =>
@@ -19,15 +21,35 @@ class AddContacts extends Component {
     event.preventDefault();
     const { name, email, phone } = this.state;
 
+    //ERROR CHECKING
+    if (name === '') {
+      this.setState({ errors: { name: 'Name is required' } });
+      return;
+    }
+
+    if (email === '') {
+      this.setState({ errors: { email: 'Email is required' } });
+      return;
+    }
+
+    if (phone === '') {
+      this.setState({ errors: { phone: 'Phone number is required' } });
+      return;
+    }
+
     const newContact = { id: uuid(), name, email, phone };
     dispatch({ type: 'ADD_CONTACT', payload: newContact });
 
     // CLEAR THE INPUT FIELDS
-    this.setState({ name: '', email: '', phone: '' });
+    this.setState({ name: '', email: '', phone: '', errors: {} });
+  };
+
+  hideShow = () => {
+    this.setState({ status: !this.state.status });
   };
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -38,41 +60,47 @@ class AddContacts extends Component {
               <div className="card-header">
                 Add Contact
                 <i
+                  onClick={this.hideShow}
                   className="fas fa-sort-down"
                   style={{ float: 'right', color: 'red' }}
                 />
               </div>
-              <div className="card-body">
-                <form onSubmit={e => this.onFormSubmit(dispatch, e)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Name"
-                    value={name}
-                    onFieldChange={this.onFieldChange}
-                  />
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    placeholder="Enter Email"
-                    type="email"
-                    value={email}
-                    onFieldChange={this.onFieldChange}
-                  />
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Enter Phone"
-                    value={phone}
-                    onFieldChange={this.onFieldChange}
-                  />
-                  <input
-                    type="submit"
-                    value="Add Contact"
-                    className="btn btn-light btn-block"
-                  />
-                </form>
-              </div>
+              {this.state.status ? (
+                <div className="card-body">
+                  <form onSubmit={e => this.onFormSubmit(dispatch, e)}>
+                    <TextInputGroup
+                      label="Name"
+                      name="name"
+                      placeholder="Enter Name"
+                      value={name}
+                      onFieldChange={this.onFieldChange}
+                      error={errors.name}
+                    />
+                    <TextInputGroup
+                      label="Email"
+                      name="email"
+                      placeholder="Enter Email"
+                      type="email"
+                      value={email}
+                      onFieldChange={this.onFieldChange}
+                      error={errors.email}
+                    />
+                    <TextInputGroup
+                      label="Phone"
+                      name="phone"
+                      placeholder="Enter Phone"
+                      value={phone}
+                      onFieldChange={this.onFieldChange}
+                      error={errors.phone}
+                    />
+                    <input
+                      type="submit"
+                      value="Add Contact"
+                      className="btn btn-light btn-block"
+                    />
+                  </form>
+                </div>
+              ) : null}
             </div>
           );
         }}
