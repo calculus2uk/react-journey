@@ -42,6 +42,9 @@ class AddContacts extends Component {
 
     // CLEAR THE INPUT FIELDS
     this.setState({ name: '', email: '', phone: '', errors: {} });
+
+    //Redirect to the home page that shows the list
+    this.props.history.push('/');
   };
 
   hideShow = () => {
