@@ -4,6 +4,7 @@ import Contacts from './components/contacts/Contacts';
 import AddContacts from './components/contacts/AddContacts';
 import About from './components/pages/About';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PageNotFound from './components/pages/PageNotFound';
 
 import { Provider } from './context';
 
@@ -22,6 +23,7 @@ class App extends Component {
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/contacts/add" component={AddContacts} />
+                <Route component={PageNotFound} />
               </Switch>
             </div>
           </div>
