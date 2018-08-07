@@ -18,7 +18,7 @@ class AddContacts extends Component {
       [event.target.name]: event.target.value
     });
 
-  onFormSubmit = (dispatch, event) => {
+  onFormSubmit = async (dispatch, event) => {
     event.preventDefault();
     const { name, email, phone } = this.state;
 
@@ -39,9 +39,12 @@ class AddContacts extends Component {
     }
 
     const newContact = { id: uuid(), name, email, phone };
-    axios
-      .post('https://jsonplaceholder.typicode.com/users', newContact)
-      .then(res => dispatch({ type: 'ADD_CONTACT', payload: res.data }));
+    const res = await axios.post(
+      'https://jsonplaceholder.typicode.com/users',
+      newContact
+    );
+
+    dispatch({ type: 'ADD_CONTACT', payload: res.data });
 
     // CLEAR THE INPUT FIELDS
     this.setState({ name: '', email: '', phone: '', errors: {} });
