@@ -11,15 +11,39 @@ class Contacts extends Component {
     this.setState({ contacts: newContacts });
   }; */
 
+  state = {
+    searchContact: ''
+  };
+
+  searchContactHandler = e => {
+    this.setState({ searchContact: e.target.value });
+  };
+
   render() {
     return (
       <Consumer>
         {value => {
           const { contacts } = value;
+          const copyContacts = { ...contacts };
+          let transformedfilteredContacts = Object.values(copyContacts).filter(
+            contact => {
+              return contact.name
+                .toLowerCase()
+                .includes(this.state.searchContact.toLocaleLowerCase());
+            }
+          );
+
           return (
             <React.Fragment>
               <h4 className="display-3">Contacts Lists</h4>
-              {contacts.map(contact => (
+
+              <input
+                type="text"
+                onChange={this.searchContactHandler}
+                className="input-group card card-body mb-3"
+                placeholder="Enter Name to Search"
+              />
+              {transformedfilteredContacts.map(contact => (
                 <Contact
                   key={contact.id}
                   //name={contact.name}
