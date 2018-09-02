@@ -9,7 +9,7 @@ class AddContacts extends Component {
     name: '',
     email: '',
     phone: '',
-    errors: '',
+    errors: {},
     status: false
   };
 
@@ -25,16 +25,19 @@ class AddContacts extends Component {
     //ERROR CHECKING
     if (name === '') {
       this.setState({ errors: { name: 'Name is required' } });
+      console.log(this.state);
       return;
     }
 
     if (email === '') {
       this.setState({ errors: { email: 'Email is required' } });
+      console.log(this.state);
       return;
     }
 
     if (phone === '') {
       this.setState({ errors: { phone: 'Phone number is required' } });
+      console.log(this.state);
       return;
     }
 
@@ -43,7 +46,6 @@ class AddContacts extends Component {
       'https://jsonplaceholder.typicode.com/users',
       newContact
     );
-
     dispatch({ type: 'ADD_CONTACT', payload: res.data });
 
     // CLEAR THE INPUT FIELDS

@@ -32,6 +32,7 @@ class Contacts extends Component {
                 .includes(this.state.searchContact.toLocaleLowerCase());
             }
           );
+          console.log(transformedfilteredContacts);
 
           return (
             <React.Fragment>

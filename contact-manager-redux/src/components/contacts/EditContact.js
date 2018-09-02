@@ -27,6 +27,8 @@ class EditContact extends Component {
 
     const { name, email, phone } = this.state;
 
+    this.setState({ name, email, phone });
+
     // Check For Errors
     if (name === '') {
       this.setState({ errors: { name: 'Name is required' } });
@@ -51,9 +53,9 @@ class EditContact extends Component {
       email,
       phone
     };
+    /// UPDATE CONTACT ////
 
     this.props.updateContact(updContact);
-    //// UPDATE CONTACT ////
 
     // Clear State
     this.setState({
