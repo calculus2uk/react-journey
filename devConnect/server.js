@@ -6,7 +6,7 @@ const passportFile = require('./config/passport');
 
 //Routes
 const users = require('./routes/api/users');
-//const profile = require('./routes/api/profile');
+const profile = require('./routes/api/profiles');
 
 //App initialization
 const app = express();
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/users', users);
-//app.use('/api/profile', profile);
+app.use('/api/profiles', profile);
 
 //Listening on Port
 const port = process.env.PORT || 5000;
