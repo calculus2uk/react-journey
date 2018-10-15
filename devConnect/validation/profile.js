@@ -30,6 +30,7 @@ function validatorProfileInput(data) {
       errors.youtube = 'Not a Valid URL';
     }
   }
+
   if (!IsEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
       errors.twitter = 'Not a Valid URL';
