@@ -17,7 +17,7 @@ const Pagination = ({ total, pageSize, onPageChange, currentPage }) => {
           >
             <a
               className="page-link"
-              href="tuagba.com"
+              href="#"
               onClick={() => onPageChange(page)}
             >
               {page}
