@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { getMovies } from '../Helpers/fakeMovieService';
+import Like from './Like';
+import Pagination from './Pagination';
 
 class Movies extends Component {
   state = {
@@ -12,6 +14,15 @@ class Movies extends Component {
     movies = movies.filter(m => m._id !== movie._id);
 
     //const movies = this.state.movies.filter(m => m._id !== movie._id);
+
+    this.setState({ movies });
+  };
+
+  handleLiked = movie => {
+    const { movies } = { ...this.state };
+    movie.liked = !movie.liked;
+    const index = movies.indexOf(movie);
+    movies[index] = movie;
 
     this.setState({ movies });
   };
@@ -29,13 +40,14 @@ class Movies extends Component {
           <Fragment>
             <p>Current Movie count is {total} </p>
             <table className="table table-striped">
-              <thead>
+              <thead className="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Title</th>
                   <th scope="col">Genre</th>
                   <th scope="col">Stock</th>
                   <th scope="col">Rate</th>
+                  <th />
                   <th />
                 </tr>
               </thead>
@@ -47,9 +59,13 @@ class Movies extends Component {
                     <td>{m.genre.name}</td>
                     <td>{m.numberInStock}</td>
                     <td>{m.dailyRentalRate}</td>
+                    <td onClick={() => this.handleLiked(m)}>
+                      <Like like={m.liked} />
+                    </td>
                     <td className="btn">
                       <button
                         type="button"
+                        className="btn btn-danger"
                         onClick={() => this.handleDelete(m)}
                       >
                         Delete
