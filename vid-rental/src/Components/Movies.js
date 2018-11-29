@@ -2,10 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { getMovies } from '../Helpers/fakeMovieService';
 import Like from './Like';
 import Pagination from './Pagination';
+import { paginate } from '../Helpers/paginate';
 
 class Movies extends Component {
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    currentPage: 1,
+    pageSize: 4
   };
 
   handleDelete = movie => {
@@ -26,10 +29,17 @@ class Movies extends Component {
 
     this.setState({ movies });
   };
-  render() {
-    const { movies } = this.state;
 
-    const total = movies.length;
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
+
+  render() {
+    const { movies: allMovies, pageSize, currentPage } = this.state;
+
+    const total = allMovies.length;
+
+    const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
       <div className="container">
@@ -75,6 +85,12 @@ class Movies extends Component {
                 ))}
               </tbody>
             </table>
+            <Pagination
+              total={total}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
           </Fragment>
         )}
       </div>
